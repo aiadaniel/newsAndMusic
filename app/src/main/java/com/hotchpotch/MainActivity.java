@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mNestedViewPager = (NestedViewPager) findViewById(R.id.main_viewpager);
-        MusicFragment musicFragment = new MusicFragment();
-        NewsFragment newsFragment = new NewsFragment();
-        NovelFragment novelFragment = new NovelFragment();
+        MusicFragment musicFragment = new MusicFragment();//音乐
+        NewsFragment newsFragment = new NewsFragment();//新闻
+        NovelFragment novelFragment = new NovelFragment();//小说
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         mainViewPagerAdapter.addFragment(musicFragment);
         mainViewPagerAdapter.addFragment(newsFragment);

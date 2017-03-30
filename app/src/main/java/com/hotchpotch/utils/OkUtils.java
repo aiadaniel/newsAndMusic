@@ -55,6 +55,7 @@ public class OkUtils {
         StringBuilder realUrl = new StringBuilder(NETEASE_NEW_HOST).append(NETEASE_NEWS_ARTICLE)
                 .append(channelType).append(URL_SEPARATOR).append(channelid).append(URL_SEPARATOR)
                 .append(startPage).append("-20.html");
+        Log.d(tag,"newsURL: " + realUrl.toString());
         Request request = new Request.Builder().url(realUrl.toString()).build();
         mClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -65,7 +66,7 @@ public class OkUtils {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d(tag,"getnews " + response.code());
+                Log.d(tag,"getnews res " + response.code());
                 if (response.isSuccessful()) {
 //                    Log.d(tag,response.body().string());
                     Gson gson = new Gson();
@@ -91,11 +92,11 @@ public class OkUtils {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d(tag,"getnovel " + response.code());
+                Log.d(tag,"getnovel res " + response.code());
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     List<NovelEntity.NovelItem> entities = gson.fromJson(response.body().string(), NovelEntity.class).getData();
-                    Log.d(tag,"getnovel " + entities.size());
+                    Log.d(tag,"getnovel datasize " + entities.size());
                 }
             }
         });

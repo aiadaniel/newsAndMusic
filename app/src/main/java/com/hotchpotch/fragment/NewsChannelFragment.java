@@ -2,7 +2,6 @@ package com.hotchpotch.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +22,7 @@ import java.util.Map;
  * Created by lxm.
  */
 
-public class NewsChannelFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class NewsChannelFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String tag = "11111";
 
@@ -48,6 +47,11 @@ public class NewsChannelFragment extends Fragment implements SwipeRefreshLayout.
         }
     }
 
+    @Override
+    public void loadData() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,7 +64,8 @@ public class NewsChannelFragment extends Fragment implements SwipeRefreshLayout.
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addOnScrollListener(new EndlessRecyclerListener(linearLayoutManager) {
             @Override
-            public void onLoadMore(int currentPage) {
+           public void onLoadMore(int currentPage) {
+                Log.d(tag,"onLoadMore page " + currentPage);
                 mStartPage = currentPage;
                 getNewsList();
             }
@@ -76,7 +81,7 @@ public class NewsChannelFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void onNewsDataRes(int res, final Map<String,ArrayList<NewsEntity>> entities) {
                 if (res == OkUtils.RES_SUCCESS) {
-                    Log.d(tag,"get news size " + entities.size());
+                    Log.d(tag,"on newsdata size " + entities.size());
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
